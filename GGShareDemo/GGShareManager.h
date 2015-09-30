@@ -7,7 +7,26 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GGShareConfiguration.h"
 
 @interface GGShareManager : NSObject
+
++ (instancetype)sharedInstance;
+- (void)registerConfigure;
+
+
+
+- (void)shareWeibo;
+- (void)shareQQ;
+- (void)shareQQSpace;
+- (void)shareWeChat;
+- (void)shareWeChatTimeLine;
+- (void)shareSMS;
+
+
+
+- (BOOL)isQQInstalled;
+- (BOOL)isWeChatInstalled;
+
 
 @end
