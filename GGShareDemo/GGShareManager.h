@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GGShareConfiguration.h"
+#import "GGShareModel.h"
 
 @interface GGShareManager : NSObject
 

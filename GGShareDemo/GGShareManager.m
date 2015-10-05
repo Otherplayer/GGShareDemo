@@ -25,27 +25,27 @@
 #pragma mark - share action
 
 - (void)shareWeibo{
-    [self shareContentWithType:ShareTypeSinaWeibo];
+    [self shareContentWithType:ShareTypeSinaWeibo content:nil];
 }
 
 - (void)shareQQ{
-    [self shareContentWithType:ShareTypeQQ];
+    [self shareContentWithType:ShareTypeQQ content:nil];
 }
 
 - (void)shareQQSpace{
-    [self shareContentWithType:ShareTypeQQSpace];
+    [self shareContentWithType:ShareTypeQQSpace content:nil];
 }
 
 - (void)shareWeChat{
-    [self shareContentWithType:ShareTypeWeixiSession];
+    [self shareContentWithType:ShareTypeWeixiSession content:nil];
 }
 
 - (void)shareWeChatTimeLine{
-    [self shareContentWithType:ShareTypeWeixiTimeline];
+    [self shareContentWithType:ShareTypeWeixiTimeline content:nil];
 }
 
 - (void)shareSMS{
-    [self shareContentWithType:ShareTypeSMS];
+    [self shareContentWithType:ShareTypeSMS content:nil];
 }
 
 
@@ -72,10 +72,10 @@
 
 
 // 分享
-- (void)shareContentWithType:(ShareType)type {
-    NSString *imagePath = [[NSBundle mainBundle] pathForResource:@"ShareSDK" ofType:@"png"];
+- (void)shareContentWithType:(ShareType)type content:(GGShareModel *)cInfo{
     
-    id<ISSContent> publishContent = [self publicContentWithImage:[ShareSDK imageWithPath:imagePath]];;
+    id<ISSCAttachment> image = [ShareSDK imageWithUrl:cInfo.imageUrl];
+    id<ISSContent> publishContent = [self initializeContent];
     
     
     
@@ -83,21 +83,21 @@
         case ShareTypeQQ:{
             //定制QQ分享信息
             [publishContent addQQUnitWithType:[NSNumber numberWithInt:SSPublishContentMediaTypeNews]
-                                      content:@"Otherplayer"
-                                        title:@"标题title"
-                                          url:@"www.baidu.com"
-                                        image:[ShareSDK imageWithPath:imagePath]];
+                                      content:cInfo.content
+                                        title:cInfo.title
+                                          url:cInfo.url
+                                        image:image];
         }
             break;
         case ShareTypeQQSpace:{
             //定制QQ空间分享
-            [publishContent addQQSpaceUnitWithTitle:@"标题"
-                                                url:@"www.baidu.com"
+            [publishContent addQQSpaceUnitWithTitle:cInfo.title
+                                                url:cInfo.url
                                                site:nil
                                             fromUrl:nil
                                             comment:INHERIT_VALUE
-                                            summary:@"Otherplayer"
-                                              image:[ShareSDK imageWithPath:imagePath]
+                                            summary:cInfo.content
+                                              image:image
                                                type:INHERIT_VALUE
                                             playUrl:nil
                                                nswb:nil];
@@ -106,11 +106,11 @@
         case ShareTypeWeixiSession:{
             //定制微信朋友圈
             [publishContent addWeixinSessionUnitWithType:[NSNumber numberWithInt:SSPublishContentMediaTypeNews]
-                                                 content:@"Otherplayer"
-                                                   title:@"标题title"
-                                                     url:@"www.baidu.com"
-                                              thumbImage:[ShareSDK imageWithPath:imagePath]
-                                                   image:[ShareSDK imageWithPath:imagePath]
+                                                 content:cInfo.content
+                                                   title:cInfo.title
+                                                     url:cInfo.url
+                                              thumbImage:[ShareSDK imageWithUrl:cInfo.imageUrl]
+                                                   image:image
                                             musicFileUrl:nil
                                                  extInfo:nil
                                                 fileData:nil
@@ -120,11 +120,11 @@
         case ShareTypeWeixiTimeline:{
             //定制微信朋友圈信息
             [publishContent addWeixinTimelineUnitWithType:[NSNumber numberWithInteger:SSPublishContentMediaTypeNews]
-                                                  content:@"Otherplayer"
-                                                    title:@"标题title"
-                                                      url:@"www.baidu.com"
-                                               thumbImage:[ShareSDK imageWithPath:imagePath]
-                                                    image:[ShareSDK imageWithPath:imagePath]
+                                                  content:cInfo.content
+                                                    title:cInfo.title
+                                                      url:cInfo.url
+                                               thumbImage:[ShareSDK imageWithUrl:cInfo.thumbImageUrl]
+                                                    image:image
                                              musicFileUrl:nil
                                                   extInfo:nil
                                                  fileData:nil
@@ -133,7 +133,7 @@
             break;
         case ShareTypeSMS:{
             //定制短信信息
-            [publishContent addSMSUnitWithContent:@"Otherplayer"
+            [publishContent addSMSUnitWithContent:cInfo.content
                                           subject:nil
                                       attachments:nil
                                                to:nil];
@@ -141,12 +141,12 @@
             break;
         default:{
             //构造分享内容
-            publishContent = [ShareSDK content:@"Otherplayer"
-                                defaultContent:@"__无邪_"
-                                         image:[ShareSDK imageWithPath:imagePath]
-                                         title:@"标题title"
-                                           url:@"www.baidu.com"
-                                   description:@"测试微博"
+            publishContent = [ShareSDK content:cInfo.content
+                                defaultContent:cInfo.defaultContent
+                                         image:image
+                                         title:cInfo.title
+                                           url:cInfo.url
+                                   description:cInfo.description
                                      mediaType:SSPublishContentMediaTypeImage];
         }
             break;
@@ -171,10 +171,10 @@
 }
 
 
--(id<ISSContent>)publicContentWithImage:(id<ISSCAttachment>)attachImage{
+-(id<ISSContent>)initializeContent{
     return  [ShareSDK content:nil
                defaultContent:nil
-                        image:attachImage
+                        image:nil
                         title:nil
                           url:nil
                   description:nil
@@ -203,7 +203,7 @@
     
     [ShareSDK connectSinaWeiboWithAppKey:kSinaWeiboAppKey
                                appSecret:kSinaWeiboAppSecret
-                             redirectUri:@"http://www.hotyq.com"];
+                             redirectUri:kShareRedirectUri];
     /********************************************
     //当使用新浪微博客户端分享的时候需要按照下面的方法来初始化新浪的平台
     [ShareSDK  connectSinaWeiboWithAppKey:@"568898243"

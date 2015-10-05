@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		635E1F061BBBE7E600C7125F /* GGShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 635E1F051BBBE7E600C7125F /* GGShareModel.m */; settings = {ASSET_TAGS = (); }; };
 		63AAAC251BBBB8710028FD09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AAAC241BBBB8710028FD09 /* main.m */; };
 		63AAAC281BBBB8710028FD09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AAAC271BBBB8710028FD09 /* AppDelegate.m */; };
 		63AAAC2B1BBBB8710028FD09 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AAAC2A1BBBB8710028FD09 /* ViewController.m */; };
@@ -53,6 +54,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		635E1F041BBBE7E600C7125F /* GGShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGShareModel.h; sourceTree = "<group>"; };
+		635E1F051BBBE7E600C7125F /* GGShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGShareModel.m; sourceTree = "<group>"; };
 		63AAAC201BBBB8710028FD09 /* GGShareDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GGShareDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63AAAC241BBBB8710028FD09 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		63AAAC261BBBB8710028FD09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -295,6 +298,8 @@
 			isa = PBXGroup;
 			children = (
 				63AAAC7D1BBBBA5D0028FD09 /* GGShareConfiguration.h */,
+				635E1F041BBBE7E600C7125F /* GGShareModel.h */,
+				635E1F051BBBE7E600C7125F /* GGShareModel.m */,
 				63AAAC7A1BBBB8FB0028FD09 /* GGShareManager.h */,
 				63AAAC7B1BBBB8FB0028FD09 /* GGShareManager.m */,
 			);
@@ -401,6 +406,7 @@
 				63AAAC2B1BBBB8710028FD09 /* ViewController.m in Sources */,
 				63AAAC281BBBB8710028FD09 /* AppDelegate.m in Sources */,
 				63AAAC251BBBB8710028FD09 /* main.m in Sources */,
+				635E1F061BBBE7E600C7125F /* GGShareModel.m in Sources */,
 				63AAAC7C1BBBB8FB0028FD09 /* GGShareManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -587,6 +593,7 @@
 				63AAAC391BBBB8710028FD09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

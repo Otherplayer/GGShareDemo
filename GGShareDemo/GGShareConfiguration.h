@@ -29,5 +29,7 @@
 #define kWechatAppSecret    @"5b529ed4cb9012b6633fc43a014ccd07"
 
 
+#define kShareRedirectUri   @"www.baidu.com"
+
 
 #endif /* GGShareConfiguration_h */
